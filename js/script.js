@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
     //TABS
-
     const tabs = document.querySelectorAll('.tabheader__item'),
           tabsContent = document.querySelectorAll('.tabcontent'),
           tabsParent = document.querySelector('.tabheader__items');
@@ -39,7 +38,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     //TIMER
-
     const deadline = '2022-07-31';
     let days, hours, minutes, seconds;
     function getTimeRemaining (endtime) {
@@ -51,11 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
             minutes = 0;
             seconds = 0;
         } else {
-              // НИЖЕ МЫ ПОЛУЧАЕМ КОЛ-ВО МИЛЛИСЕК В СУТКАХ
-              // 1000 МИЛЛИСЕК * 60 СЕК * 60 МИНУТ * 24 ЧАСОВ В СУТКАХ
               days = Math.floor(t / (1000 * 60 * 60 * 24));
-              // ЗДЕСЬ ПОЛУЧАЕМ КОЛ-ВО ЧАСОВ БЕЗ ОСТАТКА СУТОК
-              // ЧТОБЫ ОИ НЕ ПЕРЕНОСИЛИСЬ НА ДНИ
               hours = Math.floor((t / (1000 * 60 *60) % 24)); 
               minutes = Math.floor((t / 1000 / 60) % 60);
               seconds = Math.floor((t / 1000) % 60);
@@ -87,7 +81,6 @@ window.addEventListener('DOMContentLoaded', () => {
               seconds = timer.querySelector('#seconds'),
               timeInterval = setInterval(updateClock, 1000);
               
-        // ЧТОБЫ НЕ МИГАЛ ТАЙМЕР ПРИ ОБНОВЛ-И СРАЗУ ИНИЦИАЛИЗ-ЕМ ФУНКЦИЮ
         updateClock();  
 
         function updateClock() {
@@ -107,7 +100,6 @@ window.addEventListener('DOMContentLoaded', () => {
     setClock('.timer', deadline);
 
     //MODAL
-
     const modal = document.querySelector('.modal'),
           modalTrigger = document.querySelectorAll('[data-modal]');
 
@@ -115,8 +107,8 @@ window.addEventListener('DOMContentLoaded', () => {
     function openModal() {
         modal.classList.add('show');
         modal.classList.remove('hide');
-        document.body.style.overflow = 'hidden'; // СТР ЗА МОДАЛ ОКНОМ ПЕРЕСТАЕТ СКРОЛЛИТЬСЯ 
-        clearInterval(modalTimerId); // ОЧИЩ-ЕМ ТАЙМЕР, ЕСЛИ ПОЛЬЗ-ЛЬ САМ ОТКРЫЛ МОДАЛ ОКНО
+        document.body.style.overflow = 'hidden';  
+        clearInterval(modalTimerId); 
     } 
     
     modalTrigger.forEach(btn => {
@@ -127,35 +119,27 @@ window.addEventListener('DOMContentLoaded', () => {
     function closeModal() {
         modal.classList.add('hide');
         modal.classList.remove('show');
-        document.body.style.overflow = ''; // ВОЗВР-ЕМ СКРОЛЛ НА СТР
+        document.body.style.overflow = ''; 
     }
 
 
-
-    // modalCloseBtn.addEventListener('click', closeModal); // В ОБР СОБЫТИЙ ФУНК НЕ ВЫЗ-СЯ СО СКОБКАМИ
-
-    // ЗАКРЫТИЕ МОДАЛ ОКНА ПРИ КЛИКЕ ЗА ЕГО РАМКИ
     modal.addEventListener('click', (e) => {
         if (e.target === modal || e.target.getAttribute('data-close') == '') {
             closeModal();
         }
     });
 
-    // ЗАКРЫТИЕ МОДАЛ ОКНА ПРИ НАЖАТИИ ESCAPE
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Escape' && modal.classList.contains('show')) {
             closeModal();
         }
     });
 
-    // УСТАНОВКА ТАЙМЕРА ДЛЯ ПОЯВЛ-Я МОДАЛ ОКНА
     const modalTimerId = setTimeout(openModal, 50000);
 
-    // ФОРМУЛА ОПРЕД-Я ПОЛНОЙ ПРОКРУТКИ СОДЕРЖИМОГО САЙТА И САМОГО СКРОЛЛА
     function showModalByScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight -1) {
             openModal();
-            // УДАЛ-Е ПРОИСХ-Т ТОЛЬКО ТАК: ВНУТРИ ФУНК, КОТОР ВЫЗЫВ-СЬ В НАЗНАЧ-И ОБРАБ СОБЫТИЙ
             window.removeEventListener('scroll', showModalByScroll);
         }
     }
@@ -188,7 +172,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 this.classes = "menu__item";
                 elem.classList.add(this.classes);
             } else {
-            // МЫ ПЕРЕБЕР-М МАССИВ КЛАССОВ И ДОБАВЛ-М КАЖДЫЙ КЛАСС НАШЕМУ DIV ELEM
             this.classes.forEach(className => elem.classList.add(className));
             }
 
@@ -215,7 +198,7 @@ window.addEventListener('DOMContentLoaded', () => {
         'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
         229,
         '.menu .container',
-        "menu__item", // пишем без точки птму что раб-ем через CLASSLIST ADD
+        "menu__item",
         "big"
     ).render();
 
